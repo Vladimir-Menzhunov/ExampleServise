@@ -17,6 +17,7 @@ public class MainActivity extends AppCompatActivity {
     private Button butStop;
     private SampleBroadcastReceiver sampleBrodcastResiver;
     private IntentFilter intentFilter;
+    private Button butCatch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
 
         butStart = findViewById(R.id.but_start_service);
         butStop = findViewById(R.id.but_stop_service);
+        butCatch = findViewById(R.id.but_catch_service);
 
         butStart.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -42,8 +44,16 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        butCatch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sendBroadcast(new Intent(SampleBroadcastReceiver.SAMPLE_ACTION));
+            }
+        });
+
+
         sampleBrodcastResiver = new SampleBroadcastReceiver();
-        intentFilter = new IntentFilter(Intent.ACTION_AIRPLANE_MODE_CHANGED);
+        intentFilter = new IntentFilter(SampleBroadcastReceiver.SAMPLE_ACTION);
     }
 
     @Override

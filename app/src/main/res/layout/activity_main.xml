@@ -21,6 +21,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"/>
+    <Button
+        android:id="@+id/but_catch_service"
+        android:text="@string/catch_click"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"/>
 
 
 </LinearLayout>
