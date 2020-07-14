@@ -3,16 +3,20 @@ package vladimir.exampleservise;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
 import vladimir.exampleservise.services.CountService;
+import vladimir.exampleservise.services.SampleBroadcastReceiver;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button butStart;
-    Button butStop;
+    private Button butStart;
+    private Button butStop;
+    private SampleBroadcastReceiver sampleBrodcastResiver;
+    private IntentFilter intentFilter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +42,20 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        sampleBrodcastResiver = new SampleBroadcastReceiver();
+        intentFilter = new IntentFilter(Intent.ACTION_AIRPLANE_MODE_CHANGED);
+    }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        registerReceiver(sampleBrodcastResiver, intentFilter);
+
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        unregisterReceiver(sampleBrodcastResiver);
     }
 }
