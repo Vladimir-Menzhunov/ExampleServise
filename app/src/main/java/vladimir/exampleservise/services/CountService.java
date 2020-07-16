@@ -15,11 +15,11 @@ import java.util.concurrent.TimeUnit;
 
 public class CountService extends Service {
 
+    public static final String TIME = "TIME";
     private final String TAG = this.getClass().getName();
     private ScheduledExecutorService executorService;
 
     public CountService() {
-
     }
 
     @Override
@@ -33,10 +33,16 @@ public class CountService extends Service {
         Log.d(TAG, "onStartCommand:");
 
         executorService.scheduleAtFixedRate(new Runnable() {
+
+            private long currentTimeMillis;
+
             @Override
             public void run() {
-                Log.d(TAG, "currentSecond: " + System.currentTimeMillis() * 1000);
-                sendBroadcast(new Intent(SampleBroadcastReceiver.SAMPLE_ACTION));
+                currentTimeMillis = System.currentTimeMillis();
+                Log.d(TAG, "currentSecond: " + currentTimeMillis);
+                Intent intentToSend = new Intent(SampleBroadcastReceiver.SAMPLE_ACTION);
+                intentToSend.putExtra(TIME, currentTimeMillis);
+                sendBroadcast(intentToSend);
             }
         },0, 4, TimeUnit.SECONDS);
 
