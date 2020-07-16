@@ -36,8 +36,9 @@ public class CountService extends Service {
             @Override
             public void run() {
                 Log.d(TAG, "currentSecond: " + System.currentTimeMillis() * 1000);
+                sendBroadcast(new Intent(SampleBroadcastReceiver.SAMPLE_ACTION));
             }
-        },0, 1, TimeUnit.SECONDS);
+        },0, 4, TimeUnit.SECONDS);
 
         return START_STICKY; // Если сервис будет прерван устройством, то он будет ждать когда появится возможность востановить сервис
 
