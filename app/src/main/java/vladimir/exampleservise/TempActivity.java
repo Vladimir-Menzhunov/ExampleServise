@@ -11,6 +11,7 @@ import vladimir.exampleservise.services.CountService;
 public class TempActivity extends AppCompatActivity {
 
     TextView textView;
+    private String stringExtra;
 
 
     @Override
@@ -20,8 +21,8 @@ public class TempActivity extends AppCompatActivity {
 
         textView = findViewById(R.id.tv_text);
 
-        long time = getIntent().getLongExtra(CountService.TIME, 0L);
+        stringExtra = getIntent().getStringExtra(CountService.TIME);
 
-        textView.setText("Time is " + time);
+        textView.setText("Time is from notification" + stringExtra);
     }
 }

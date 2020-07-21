@@ -3,6 +3,7 @@ package vladimir.exampleservise.services;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Intent;
 import android.os.Build;
@@ -17,6 +18,7 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 import vladimir.exampleservise.R;
+import vladimir.exampleservise.TempActivity;
 
 public class CountService extends Service {
 
@@ -85,7 +87,15 @@ public class CountService extends Service {
     }
 
     private Notification getNotification(String contentText) {
-        return mBuilder.setContentText(contentText).build();
+        Intent intent = new Intent(this, TempActivity.class);
+        intent.putExtra(TIME, contentText);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 1234, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+
+
+        return mBuilder.setContentText(contentText)
+                .setContentIntent(pendingIntent)
+                .build();
     }
 
 
