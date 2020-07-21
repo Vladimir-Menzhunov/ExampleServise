@@ -7,6 +7,7 @@ import android.content.IntentFilter;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import vladimir.exampleservise.services.CountService;
 import vladimir.exampleservise.services.SampleBroadcastReceiver;
@@ -18,12 +19,15 @@ public class MainActivity extends AppCompatActivity {
     private SampleBroadcastReceiver sampleBrodcastResiver;
     private IntentFilter intentFilter;
     private Button butCatch;
+    private TextView textView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+        textView = findViewById(R.id.tv_textService);
         butStart = findViewById(R.id.but_start_service);
         butStop = findViewById(R.id.but_stop_service);
         butCatch = findViewById(R.id.but_catch_service);
@@ -52,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        sampleBrodcastResiver = new SampleBroadcastReceiver();
+        sampleBrodcastResiver = new SampleBroadcastReceiver(textView);
         intentFilter = new IntentFilter(SampleBroadcastReceiver.SAMPLE_ACTION);
     }
 
